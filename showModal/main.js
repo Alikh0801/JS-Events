@@ -14,6 +14,5 @@ closeBtn.addEventListener('click', () => {
 quickMode.addEventListener('click', (e) => {
     if (e.target === quickMode) {
         quickMode.style.display = 'none';
-        document.body.style.overflow = '';
     }
 });
