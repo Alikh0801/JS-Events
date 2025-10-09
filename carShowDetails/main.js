@@ -3,7 +3,7 @@ const info = document.querySelector(`.info`)
 
 button.addEventListener(`click`, () => {
 
-    if (info.style.display === `none`) {
+    if (info.style.display === `none` || info.style.display === '') {
         info.style.display = `block`;
         button.innerText = `Hide Details`;
     } else {
