@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="az">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sade Digital Saat</title>
+    <style>
+        /* Sadə və oxunaqlı dizayn */
+        :root {
+            --bg: #0f1724;
+            --card: #0b1220;
+            --text: #e6eef8;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: linear-gradient(180deg, var(--bg), #071020);
+            color: var(--text);
+        }
+
+        .wrap {
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .clock {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 28px 36px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+            text-align: center;
+            min-width: 260px;
+        }
+
+        .time {
+            font-size: 64px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .date {
+            margin-top: 8px;
+            font-size: 14px;
+            opacity: 0.9
+        }
+
+        .small {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 6px
+        }
+
+        @media (max-width:420px) {
+            .time {
+                font-size: 44px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="clock" id="clock">
+            <div class="time" id="time">--:--:--</div>
+            <div class="date" id="date">...</div>
+        </div>
+    </div>
+
+    <script>
+        function leadingZero(n) { return n < 10 ? '0' + n : n; }
+
+        function updateClock() {
+            const now = new Date();
+            // Lokal vaxt (brauzerin zaman zonası istifadə olunur)
+            const h = leadingZero(now.getHours());
+            const m = leadingZero(now.getMinutes());
+            const s = leadingZero(now.getSeconds());
+            document.getElementById('time').textContent = h + ':' + m + ':' + s;
+
+            // Gün, Ay adı və il üçün Azərbaycan dilində sadə format
+            const days = ['Bazar', 'Bazar ertəsi', 'Çərşənbə', 'Çərşənbə axşamı', 'Cümə', 'Cümə axşamı', 'Şənbə'];
+            const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'İyun', 'İyul', 'Avqust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr'];
+            const dayName = days[now.getDay()];
+            const date = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+            document.getElementById('date').textContent = dayName + ', ' + date;
+        }
+
+        // İlk çağırış dərhal göstərsin, sonra hər saniyə yenilə
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+
+</html>
